@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Side</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      font-size: 1.5rem;
+      font-weight: bold;
+      transition: background-color 0.15s, color 0.15s;
+      background-color: black;
+      color: white;
+    }
+    #word {
+      text-align: center;
+      padding: 0 10px;
+    }
+    #logo {
+      display: none;
+      max-width: 70%;
+      height: auto;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+    #logo.show {
+      opacity: 1;
+    }
+    .flash {
+      animation: flash 0.1s alternate infinite;
+    }
+    @keyframes flash {
+      from { background-color: black; color: white; }
+      to { background-color: white; color: black; }
+    }
+  </style>
+</head>
+<body>
+  <div id="word"></div>
+  <img id="logo" src="https://instagram.fldb3-1.fna.fbcdn.net/v/t51.2885-19/527251515_17844163197542187_6082233828390416288_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby45MjMuYzIifQ&_nc_ht=instagram.fldb3-1.fna.fbcdn.net&_nc_cat=103&_nc_oc=Q6cZ2QGO72bzKvUBmpAq3_Us_fDcF8nFq-JAOHUcOKqdv_J0JRREiFvEl4DdpNmU5dDe54GbTYl7e3nP90NnEBdINpjj&_nc_ohc=fQ-GCIEjp7AQ7kNvwGjwbQ5&_nc_gid=aBGBDo-nJjBIGKqrWTcgtA&edm=AP4sbd4BAAAA&ccb=7-5&oh=00_AfYXFM3eAjlddxNF332svTN0wb1ALOaOiiyHu8QYNu2whw&oe=68BEA012&_nc_sid=7a9f4b" alt="Urban Side Logo">
+
+  <script>
+    const phrase = "A NOVA LOJA QUE VAI REVOLUCIONAR A MODA EM APUCARANA INAUGURA EM BREVE...".split(" ");
+    const wordElement = document.getElementById("word");
+    const logoElement = document.getElementById("logo");
+    let index = 0;
+
+    function showWord() {
+      if (index < phrase.length) {
+        const word = phrase[index];
+        // alterna fundo e texto
+        if (index % 2 === 0) {
+          document.body.style.backgroundColor = "black";
+          document.body.style.color = "white";
+        } else {
+          document.body.style.backgroundColor = "white";
+          document.body.style.color = "black";
+        }
+        wordElement.textContent = word;
+        index++;
+        setTimeout(() => {
+          wordElement.textContent = "";
+          setTimeout(showWord, 100); // pausa menor entre palavras
+        }, 350); // tempo de exibição mais rápido
+      } else {
+        // mostra logo com fade-in
+        wordElement.style.display = "none";
+        logoElement.style.display = "block";
+        setTimeout(() => logoElement.classList.add("show"), 50);
+
+        setTimeout(() => {
+          document.body.classList.add("flash");
+          setTimeout(() => {
+            window.location.href = "https://www.instagram.com/urban_side__/";
+          }, 2000);
+        }, 1500); // logo aparece antes do piscar
+      }
+    }
+
+    showWord();
+  </script>
+</body>
+</html>

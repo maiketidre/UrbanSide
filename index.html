@@ -22,16 +22,6 @@
       text-align: center;
       padding: 0 10px;
     }
-    #logo {
-      display: none;
-      max-width: 70%;
-      height: auto;
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-    #logo.show {
-      opacity: 1;
-    }
     .flash {
       animation: flash 0.1s alternate infinite;
     }
@@ -43,12 +33,10 @@
 </head>
 <body>
   <div id="word"></div>
-  
 
   <script>
     const phrase = "A NOVA LOJA QUE VAI REVOLUCIONAR A MODA EM APUCARANA INAUGURA EM BREVE...".split(" ");
     const wordElement = document.getElementById("word");
-    const logoElement = document.getElementById("logo");
     let index = 0;
 
     function showWord() {
@@ -69,17 +57,13 @@
           setTimeout(showWord, 100); // pausa menor entre palavras
         }, 350); // tempo de exibição mais rápido
       } else {
-        // mostra logo com fade-in
-        wordElement.style.display = "none";
-        logoElement.style.display = "block";
-        setTimeout(() => logoElement.classList.add("show"), 50);
-
+        // inicia piscar e redireciona
         setTimeout(() => {
           document.body.classList.add("flash");
           setTimeout(() => {
             window.location.href = "https://www.instagram.com/urban_side__/";
           }, 2000);
-        }, 1500); // logo aparece antes do piscar
+        }, 300);
       }
     }
 
@@ -87,5 +71,4 @@
   </script>
 </body>
 </html>
-
 
